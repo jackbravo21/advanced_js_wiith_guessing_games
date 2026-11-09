@@ -874,6 +874,15 @@ let storageUser = JSON.parse(localStorage.getItem("user"));
 storageUser;
 {name: 'Jack', age: '40'}
 
+- Para verificar quantos itens foram setados com [chave, valor], posso utilizar igual em arrays:
+localStorage.length;
+
+- Comando para remover o Item do localStorage>:
+localStorage.removeItem("user");
+
+- Comando para limpar o localStorage>:
+localStorage.clear();
+
 ==========
 
 Ferramentas de DOM:
