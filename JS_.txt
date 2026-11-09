@@ -9,7 +9,7 @@ window.document.body.innerHTML += "<br />";		//quebra a linha dentro do innerHTM
 //recarregar pagina:
 location.reload();
 
-//TRIM tira os espacos da string;
+//TRIM tira os espacos da string no inicio e no final;
 terefaTexto.trim();
 
 //limpar console;
@@ -23,18 +23,25 @@ textoRegra = "Digite um numero para adivinhar!";
 let regra1 = document.getElementById('regra');
 regra1.innerHTML = textoRegra;
 
+document.getElementByClassName('regra');
+
 //mudando cor do BackGround e letra;
 <body bgcolor="black" style="color:white">
 <body bgcolor="black" style="color:rgb(0, 255, 0)">
 
-document.getElementById('tentativas');
-
 //criar elemento:
 window.document.createElement('h1');
 
-window.document.bgColor = 'black';			//modificar a cor do background;
+const titulo = document.createElement('h1');
+titulo.textContent = 'Meu título';
+titulo.innerHTML = 'Meu <strong>título</strong>';
+document.body.appendChild(titulo);			//adiciona ao DOM;
+
+window.document.bgColor = 'black';			//modificar a cor do background em navegadores antigos;
+document.body.style.backgroundColor = 'black';		//modificar a cor do background;
 
 elementList = document.querySelector('p');
+elementList[0];						//le a primeira posicao recebida;
 
 let umaString = "Um texto com \"aspas\" ";	//deixa o texto com aspas, devido ao escape;
 
@@ -76,7 +83,12 @@ const sobrenome = prompt("Digite seu sobrenome: ");
 window.document.body.innerHTML += `O seu nome eh: ${nome} ${sobrenome}<br />`;
 
 
+let b = [];		//crio um array;
+b[2] = 3;		//estou colocando o numero 3 na posição 3 do array;
+Array.isArray(b);	//verifica se eh um array;
 b.push(3);		//estou adicionando no array "b" o valor "3";
+b.nome = "jack";	//adiciona a posição do objeto nome o valor jack;
+
 
 ==========
 - Strings sao indexadas, tem um index, como se fosse um array de caracteres;
@@ -294,6 +306,53 @@ const pessoa1 = {
 
 console.log(pessoal.nome);
 console.log(pessoal.sobrenome);
+
+---
+
+Criando um Objeto com 3 pessoas dentro:
+
+const pessoas = [
+  { nome: "Ana", idade: 25, cidade: "São Paulo" },
+  { nome: "Bruno", idade: 30, cidade: "Rio de Janeiro" },
+  { nome: "Carla", idade: 22, cidade: "Curitiba" }
+];
+
+pessoas[0].nome;	//Retorna "Ana";
+
+---
+
+Buscar em um Objeto:
+
+const inventory = [
+  { name: "apples", quantity: 2 },
+  { name: "bananas", quantity: 0 },
+  { name: "cherries", quantity: 5 },
+];
+
+const result = inventory.find(({name}) => name === "cherries");
+result;
+
+---
+
+const users = [
+  { id: 0, fullname: "Jack Bravo", mail: "jackbravo@mail.com", password: "master", createdAt: "09/06/2026" },
+  { id: 1, fullname: "Ana", mail: "ana@mail.com", password: "banana", createdAt: "15/08/2026" },
+  { id: 2, fullname: "Joao", mail: "joao.com", password: "laranja", createdAt: "20/07/2026" },
+  { id: 3, fullname: "Leticia", mail: "leticia@mail.com", password: "mamao", createdAt: "29/08/2026" },
+];
+
+let searchUser = users.find(({mail}) => mail === mail);						//busca o objeto inteiro pelo mail e recebe todos os dados;
+searchUser;
+
+let mailUser = "jackbravo@mail.com";
+let passwordUser = "master";
+let busca = users.find(({mail, password})=> mail === mailUser && password === passwordUser);	//busca com find os dois iguais e recebe o objeto, armazenando;
+
+busca;
+{id: 0, fullname: 'Jack Bravo', mail: 'jackbravo@mail.com', password: 'master', createdAt: '09/06/2026'}
+
+busca.id;
+busca.mail;
 
 ---
 
@@ -774,6 +833,46 @@ ID: 3 | Array: 0,10,20,30,40,50,60 | Elemento: 30
 ID: 4 | Array: 0,10,20,30,40,50,60 | Elemento: 40
 ID: 5 | Array: 0,10,20,30,40,50,60 | Elemento: 50
 ID: 6 | Array: 0,10,20,30,40,50,60 | Elemento: 60
+
+==========
+
+LocalStorage:
+            
+- O localStorage utiliza chave valor.
+- Exemplos:            
+
+//Armazena os dados localmente;
+localStorage.setItem("id", responseData.id);
+localStorage.setItem("mail", responseData.mail);
+localStorage.setItem("fullname", responseData.fullname);
+localStorage.setItem("administrator", responseData.administrator);
+localStorage.setItem("createdAt", responseData.createdAt);
+localStorage.setItem("isLoggedIn", responseData.isLoggedIn);
+console.log("Dados armazenados localmente com sucesso!");
+
+useEffect(()=>{
+    if(isLoggedIn)
+    {
+    alert("Você Logou com usuario: " + mail);
+    localStorage.setItem('mail', mail);
+    localStorage.setItem('isLoggedIn', true);
+    navigate('/home');
+    //window.location.reload();
+    }
+}, [isLoggedIn, mail, navigate]);
+
+
+- Para armazenar um objeto no localStorage, vc usa o JSON.stringify().
+- Console:
+let user = {name: "Jack", age: "40"};
+user
+{name: 'Jack', age: '40'}
+localStorage.setItem("user", JSON.stringify(user));
+localStorage.getItem("user");
+'{"name":"Jack","age":"40"}'
+let storageUser = JSON.parse(localStorage.getItem("user"));
+storageUser;
+{name: 'Jack', age: '40'}
 
 ==========
 
@@ -1421,9 +1520,6 @@ console.log(maisVelha);
 ==========
 
 //Usando FILTER + MAP + REDUCE:
-//Filter retorna todos os itens que atendem a condicao;
-//Map passa por cada item de um array;
-//Reduce soma todos os itens e devolve;
 
 // Retorne a soma do dobro de todos os pares
 // -> Filtrar pares
@@ -2645,6 +2741,21 @@ app.use(csrf());
 
 
 ==========
+
+//Installar react:
+
+npx create-react-app nome_da_pasta
+
+//Rodar:
+
+npm start
+
+//Fragment (elemento vazio):
+
+<>
+</>
+
+
 
 ==========
 
